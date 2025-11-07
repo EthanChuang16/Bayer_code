@@ -11,7 +11,7 @@ import pandas as pd
 sourceDir = 'D:\\MGHMRI'
 
 df = pd.read_csv(os.path.join(sourceDir, 'subdirectories_ADC_mod_Edited_Pass2.csv'))
-outname = os.path.join(sourceDir, 'ADCDicom.csv')
+outname = os.path.join(sourceDir, 'DWIDicom.csv')
 
 dcmfilesArr = []
 
@@ -19,9 +19,9 @@ for index, row in df.iterrows():
   mrn = str(row['PatientID'])
   mrn_padded = mrn.zfill(7)
 
-  #if pd.notna(row['ADCMatches_filter_series2']):
+#  if pd.notna(row['DWIMatches_filter_series2']):
   if (row['Exclude'] == 0):  # O
-    seriesNumber = int(row['ADCMatches_filter_series2'])
+    seriesNumber = int(row['DWIMatches_filter_series2'])
     print('  Patient ID: ', mrn, ' Series number: ', seriesNumber)
 
     # Find name of directory
@@ -51,7 +51,7 @@ datasets = [dcmread(fn) for fn in dcmfilesArr]
 #27; #42, #43, 44
 
 keywords = ["SeriesDate", "Manufacturer", "InstitutionName", "StudyDescription", "SeriesDescription", "ManufacturerModelName",
-              "PatientID", "BodyPartExamined", "SliceThickness", "RepetitionTime", "EchoTime", "MagneticFieldStrength", "SpacingBetweenSlices",
+              "PatientID", "BodyPartExamined", "ReceiveCoilName", "MRReceiveCoilMacro", "SliceThickness", "RepetitionTime", "EchoTime", "MagneticFieldStrength", "SpacingBetweenSlices",
               "ImageOrientationPatient", "PatientPosition", "ProtocolName", "TransmitCoilName", "FlipAngle", "Rows", "Columns", "PixelSpacing"]
 
 
